@@ -3,7 +3,7 @@ node_js:
   - "stable"
 cache: yarn
 script:
-  - yarn install && yarn build
+  - npm run-script build
 
 deploy:
   provider: pages:git
