@@ -9,3 +9,4 @@ deploy:
   provider: pages:git
   token: $GITHUB_API_KEY
   edge: true 
+  local_dir: build
