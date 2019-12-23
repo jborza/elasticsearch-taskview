@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "stable"
+cache: yarn
+script:
+  - npm run-script build
+
+deploy:
+  provider: pages:git
+  token: $GITHUB_API_KEY
+  edge: true 

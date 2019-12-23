@@ -1,4 +1,5 @@
 import React from 'react';
+import truncate from './truncate';
 
 const TaskDetails = (props) => {
     const task = props.task.task;
@@ -21,7 +22,7 @@ const TaskDetails = (props) => {
         <br/>
         Remaining: {remaining} ETA: {hhmmss(millis_per_document * remaining)}
         <br/>
-        Description: <code> {task.description} </code>
+        Description: <code title={task.description}>{truncate(task.description, 80)}</code>
     </div> : null;
 };
 

@@ -9,8 +9,7 @@ const Task = (props) => {
 
     const [taskJson, setTaskJson] = useState();
 
-
-    const areTaskDetailsInteresting = (task) => task.action.startsWith("cluster:monitor") == false;
+    const areTaskDetailsInteresting = (task) => task.action.startsWith("cluster:monitor") === false;
 
     const fetchTaskData = () => {
         fetch(taskUrl).then((response) => {
@@ -41,8 +40,6 @@ const Task = (props) => {
         [doAutoRefresh]);
 
     return <div>
-        <button onClick={fetchTaskData}>&#x21bb; </button>
-
         <table border="1" style={{display:"inline-table"}}>
             <thead>
                 <tr>
@@ -66,7 +63,6 @@ const Task = (props) => {
             </tbody>
         </table>
         <br/>
-        Auto? {doAutoRefresh?"yes":"no"}
         {taskJson ? <TaskDetails task={taskJson}/> : null}
     </div>;
 };

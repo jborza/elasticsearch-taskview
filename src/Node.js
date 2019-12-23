@@ -16,7 +16,7 @@ const Node = (props) => {
     return <div>
         <h3>{node.name}</h3>
         clusterUrl: {clusterUrl}
-        auto: {JSON.stringify(doAutoRefresh)}
+        auto: {doAutoRefresh ? "on":"off"}
         <ul>
             <li>ip: {node.ip}</li>
             <li>roles: {JSON.stringify(node.roles)}</li>
