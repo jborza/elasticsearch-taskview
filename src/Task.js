@@ -4,9 +4,11 @@ import TaskDetails from "./TaskDetails";
 const Task = (props) => {
     const task = props.task;
     const clusterUrl = props.clusterUrl;
+    const doAutoRefresh = props.doAutoRefresh;
     const taskUrl = props.clusterUrl + "/_tasks/" + task.node+":"+task.id;
 
     const [taskJson, setTaskJson] = useState();
+
 
     const areTaskDetailsInteresting = (task) => task.action.startsWith("cluster:monitor") == false;
 
@@ -28,8 +30,20 @@ const Task = (props) => {
         }
     }, []);
 
+    const autoRefresh = () => {
+        if(!doAutoRefresh)
+            return;
+        fetchTaskData();
+        setTimeout(()=> autoRefresh(), 10000);
+    }
+
+    useEffect(()=>autoRefresh(), 
+        [doAutoRefresh]);
+
     return <div>
-        <table border="1">
+        <button onClick={fetchTaskData}>&#x21bb; </button>
+
+        <table border="1" style={{display:"inline-table"}}>
             <thead>
                 <tr>
                     <th>id</th>
@@ -51,6 +65,8 @@ const Task = (props) => {
                 </tr>
             </tbody>
         </table>
+        <br/>
+        Auto? {doAutoRefresh?"yes":"no"}
         {taskJson ? <TaskDetails task={taskJson}/> : null}
     </div>;
 };

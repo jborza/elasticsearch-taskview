@@ -2,12 +2,13 @@ import React from 'react';
 
 const TaskDetails = (props) => {
     const task = props.task.task;
+    if(!task)
+        return '[no task details]';
     const status = task.status;
     const completed = status ? status.updated + status.created + status.deleted
         : null;
     const remaining = status.total - completed;
     const millis_per_document = task.running_time_in_nanos / completed / 1e6;
-    const seconds_per_1k_doc = task.running_time_in_nanos / 1e9 / completed * 1e3;
     const docs_per_second = completed / task.running_time_in_nanos * 1e9;
     const hhmmss = millis => new Date(millis).toISOString().substr(11, 8);
 
