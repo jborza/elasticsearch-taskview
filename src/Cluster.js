@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Node from './Node';
+import truncate from './truncate';
 
 const Cluster = () => {
-    const [clusterUrl, setClusterUrl] = useState('http://192.168.0.112:9200');
+    const [clusterUrl, setClusterUrl] = useState('http://localhost:9200');
     const [clusterJson, setClusterJson] = useState();
     const [doAutoRefresh, setDoAutoRefresh] = useState(true);
 
@@ -37,20 +38,20 @@ const Cluster = () => {
     }, [doAutoRefresh])
 
     const nodes = clusterJson ? Object.keys(clusterJson.nodes)
-        .map(key => <Node node={clusterJson.nodes[key]} key={key} clusterUrl={clusterUrl} autoRefresh={doAutoRefresh} />)
+        .map(key => <Node node={clusterJson.nodes[key]} key={key} clusterUrl={clusterUrl} doAutoRefresh={doAutoRefresh} />)
         : null;
 
     return <div>
         <h1>Elasticsearch cluster @ {clusterUrl}</h1>
         <span>Cluster URL: <input value={clusterUrl} onChange={(e) => setClusterUrl(e.target.value)}></input>
         </span>
-        <button onClick={fetchClusterData}>Refresh </button>
-        <label>Auto-refresh <input type="checkbox" checked={doAutoRefresh} onChange={e=>setDoAutoRefresh(e.target.checked)}/></label>
-         = {doAutoRefresh ? "on":"off"}
-        <pre>{JSON.stringify(clusterJson)}</pre>
-
+        <button onClick={fetchClusterData}>&#x21bb; Refresh</button>
+        <label><input type="checkbox" checked={doAutoRefresh} onChange={e=>setDoAutoRefresh(e.target.checked)}/>Auto-refresh</label>         
+        {clusterJson ? 
+           <pre title={clusterJson}>Status: {truncate(JSON.stringify(clusterJson), 100)}</pre>
+           : null
+        }
         {nodes}
-
     </div>
 }
 
