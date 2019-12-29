@@ -3,13 +3,15 @@ import Node from './Node';
 import truncate from './truncate';
 
 const Cluster = () => {
-    const [clusterUrl, setClusterUrl] = useState('http://localhost:9200');
+    const localStorageUrlKey = 'clusterUrl';
+
+    const [clusterUrl, setClusterUrl] = useState(localStorage.getItem(localStorageUrlKey));
     const [clusterJson, setClusterJson] = useState();
-    const [doAutoRefresh, setDoAutoRefresh] = useState(true);
+    const [doAutoRefresh, setDoAutoRefresh] = useState(false);
 
     const fetchClusterData = () => {
-        const url = clusterUrl + '/_tasks';
-        console.log(url);
+        localStorage.setItem(localStorageUrlKey, clusterUrl);
+        const url = clusterUrl + '/_tasks';        
         fetch(url).then((response) => {
             return response.json();
         }).then(
@@ -30,6 +32,11 @@ const Cluster = () => {
     useEffect(() => {
         fetchClusterData();
     }, []); 
+
+    // useEffect(
+    //     ()=> setClusterUrl(localStorage.getItem(localStorageUrlKey)),
+    //     []    
+    // );
 
     useEffect(()=>{
         if(!doAutoRefresh)
