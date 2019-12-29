@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jborza/elasticsearch-taskview.svg?branch=master)](https://travis-ci.org/jborza/elasticsearch-taskview)
+
 # Elasticsearch-taskview
 
 A tool to view the status and the progress of the tasks (mostly reindex) of your elasticsearch cluster.
