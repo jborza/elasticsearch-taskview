@@ -4,7 +4,11 @@ A tool to view the status and the progress of the tasks (mostly reindex) of your
 
 1. (optional) Enable CORS for the host you're running this at in elasticsearch.yml
 2. start elasticsearch-taskview with `yarn start`
-3. Point the URL at the elasticsearch management node
+3. Point the URL at the elasticsearch management node (e.g. `http://localhost:9200`)
+
+## Release URL
+
+The current version is deployed to http://jborza.github.io/elasticsearch-taskview
 
 ## Build instructions:
 
