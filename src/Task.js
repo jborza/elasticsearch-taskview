@@ -22,9 +22,7 @@ const Task = (props) => {
     };
 
     useEffect(() => {
-        console.log('looking at task '+ JSON.stringify(task));
         if(areTaskDetailsInteresting(task)){
-            console.log('it was interesting');
             fetchTaskData()
         }
     }, []);
